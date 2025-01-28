@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- [  ] -->
+    <input type="text" value="hello"> <button> add </button> <button> remove </button>
+
+</body>
+
+</html>
+<script>
+    let ourArr = new Array(6).fill('#')
+    // let arr = []
+    console.log(ourArr, ourArr.length);
+
+    let arr1 = ['one', 'two', 'two', 'three']
+    let arr2 = [4, 5, 6]
+    let arr3 = [7, 8, 9]
+    let joinedArr = arr1.concat(arr2, arr3)
+    console.log(joinedArr);
+
+
+    console.log(arr1.indexOf('two'));
+
+    let sentence = 'There are different methods to manipulate an array. These are some of the available methods to deal with arrays:Array, length, concat, indexOf, slice, splice, join, toString, includes, lastIndexOf, isArray, fill, push, pop, shift, manipulate , unshift'
+
+    console.log(sentence.indexOf('manipulate'));
+
+    let word = 'wow'
+    console.log(typeof word);
+    console.log(typeof arr1);
+
+    console.log(Array.isArray(arr1));
+
+    let array = new Array()
+
+    // let myValue = arr1.toString() one 1 two 1 two 1 three
+    let myValue = arr1.join(' 1 ')
+
+    console.log(myValue, typeof myValue);
+
+
+    let myString = 'hello'
+    console.log(myString.slice(2, 5));
+
+    let arr = arr1.slice(2, 4)
+    console.log(arr);
+
+    let valueTwo = arr1.splice(2, 0, '2', '3', '4', '5')
+    console.log(arr1);
+    console.log(valueTwo);
+    arr1.reverse()
+    console.log(arr1);
+
+    arr1.sort()
+    console.log(arr1);
+
+    let newArr = ['2', '22', '3', '5', '73']
+    newArr.sort((a, b) => a - b)
+    console.log(newArr);
+</script>

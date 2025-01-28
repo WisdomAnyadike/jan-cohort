@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="calculate('-')"> minus </button>
+    <button onclick="calculate('+')"> add </button>
+    <button onclick="calculate('/')"> divide </button>
+    <button onclick="calculate('*')"> multiply </button>
+    hello
+
+</body>
+
+</html>
+<script>
+
+    let hisName = 'abraham'
+
+
+
+    hisName = 'ezekiel'
+    hisName = 10
+    console.log(hisName);
+
+    const gravity = 9.81
+    console.log(gravity);
+
+
+    console.log('hello world');
+
+
+    let isLightsOn = false
+
+    let myValue = null
+    let value = undefined
+
+    console.log(isLightsOn, myValue, value)
+
+    let word = 'JavaScript'
+
+
+    console.log(word[4]);
+
+    word[4] = 'Y'
+
+    word = `python`
+
+    let word1 = 'i'
+    let word2 = 'am'
+    let word3 = 'a'
+    let word4 = 'boy'
+
+    let sentence = word1 + ' wisdom ,' + word2 + ' ' + word3 + ' ' + word4
+    console.log(sentence);
+
+    let sentence1 = `${word1}  wisdom, ${word2} ${word3} ${word4}`
+    console.log(sentence1);
+
+    let string = 'javascript  class'
+    console.log(string.length);
+
+
+    let a = 8
+    let b = 2
+
+    //symbols + - / * % **
+
+    let addition = a + b
+    console.log(addition);
+    let subtraction = a - b
+    console.log(subtraction);
+    let division = b / a
+    console.log(division);
+    let multiplication = a * b
+    console.log(multiplication);
+    let raisedToPower = a ** b
+    console.log(raisedToPower);
+    let modulus = a % b
+    console.log(modulus);
+
+    let sentence2 = `the sum of ${a} and ${b} is ${a + b}`
+    console.log(sentence2);
+
+    let sentence3 = 'the sum of ' + a + ' and ' + b + ' is ' + (a + b)
+    console.log(sentence3);
+
+    let ans = '3' + 6
+    console.log(ans);
+
+
+    let myString = 'Javascript'
+    console.log(myString);
+    myString = myString.toUpperCase()
+    console.log(myString);
+
+
+    let classWork = 'im already loving javascript'
+    console.log(classWork.replace('y ', 'y-'));
+    let newArr = classWork.split() // ['im already loving javascript']
+    console.log(newArr);
+
+    let newArr1 = classWork.split('u') // ['im already loving javascript']
+    console.log(newArr1);
+
+    // let myArr = [ 9 , undefined , null , 'hello' , true , [] , {}]
+
+
+    let stringValue = '  wow'
+    stringValue = stringValue.trimStart()
+    console.log(stringValue, stringValue.length);
+
+
+    let todaysClass = 'string methods'
+    console.log(todaysClass.charAt(300));
+    let val = 'A'
+    console.log(val.charCodeAt(0));
+
+
+    let firstWord = 'I'
+    let secondWord = 'Love'
+    let thirdWord = 'Javascript'
+
+    //I Love Javascript
+
+    let mySentence = firstWord.concat(' ', secondWord, ' ', thirdWord)
+    console.log(mySentence);
+
+    console.log(mySentence.startsWith(firstWord));
+
+    console.log(mySentence.endsWith('pt'));
+
+    let myNumber = 40.23
+    myNumber = Math.round(myNumber)
+    console.log(myNumber);
+
+    // 20,3,45,6,2,7,9 ,22,56,8,9,4,-5,2,3
+    let myMinNumber = Math.min(20, 3, 45, 6, 2, 7, 9, 22, 56, 8, 9, 4, -5, 2, 3)
+    console.log(myMinNumber);
+    let myMaxNumber = Math.max(20, 3, 45, 6, 2, 7, 9, 22, 56, 8, 9, 4, -5, 2, 3)
+    console.log(myMaxNumber);
+
+
+    let randomNum = -(Math.random())
+    console.log(randomNum);
+
+    const num = Math.random() * 29 // 0 -28.89
+    let random = Math.ceil(num) + 1 // 1 - 30
+    console.log(random);
+
+    let number = Math.random() * 4 // 0.045 - 3.99
+    let zeroToFive = Math.floor(0) + 2 // 2 - 5
+    console.log(zeroToFive);
+
+    let myVal = Math.pow(100, 7)
+    let myVal1 = 100 ** 7
+    console.log(myVal);
+    console.log(myVal1);
+
+    let string1 = '4'
+    console.log(string1, typeof (string1));
+    // string1 = parseInt(string1)  //first method
+    // string1 = Number(string1)   //second method
+    string1 = +string1   // third method
+    console.log(string1, typeof (string1));
+
+
+    let input1 = document.getElementById('input1')
+    let input2 = document.getElementById('input2')
+
+    // function add() {
+    //     let myAns = Number(input1.value) + Number(Input2.value)
+    //     div.innerHTML = myAns
+    // }
+    // function subtract() {
+    //     let myAns = Number(input1.value) - Number(Input2.value)
+    //     div.innerHTML = myAns
+    // }
+
+    // function multiply() {
+    //     let myAns = Number(input1.value) * Number(Input2.value)
+    //     div.innerHTML = myAns
+    // }
+    // function divide() {
+    //     let myAns = Number(input1.value) / Number(Input2.value)
+    //     div.innerHTML = myAns
+    // }
+
+    function calculate(sym) {
+        let myAns
+        if (sym == '-') {
+            myAns = Number(input1.value) - Number(Input2.value)
+        } else if (sym == '+') {
+            myAns = Number(input1.value) + Number(Input2.value)
+        } else if (sym == '/') {
+            myAns = Number(input1.value) + Number(Input2.value)
+        } else {
+            myAns = Number(input1.value) * Number(Input2.value)
+        }
+
+        div.innerHTML = myAns
+    }
+
+
+    function saySmth(smth = 'wow', suffix = 'abraham') {
+        console.log(smth + ' ' + suffix);
+    }
+
+    console.log(saySmth());
+    saySmth('i like js',)
+    saySmth('js is so interesting,', 'i think')
+
+    function add(a, b) {
+        if (a > b) {
+            return 0
+        }
+
+        // conesole.log(a + b);
+        return a + b
+    }
+
+    let finalValue = add(4, 3) + 7
+    console.log(finalValue);
+
+
+    function calulateSpeed(d, t) {
+        return d / t
+    }
+</script>

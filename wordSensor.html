@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <button onclick="sensorWords()"> sensor </button>
+
+    <div id="preview">
+
+
+    </div>
+</body>
+
+</html>
+<script>
+    let myInput = document.querySelector('input')
+    let myDiv = document.querySelector('#preview')
+    console.log(myInput);
+
+    function sensorWords() {
+        let inputValue = myInput.value
+        myDiv.innerHTML = inputValue.replaceAll('fuck', '****').replaceAll('stupid', '******').replaceAll('foolish', "*******")
+
+    }
+
+
+    let myVariable = 'hmm , today is monday'
+    myVariable = myVariable.replace('monday', 'tuesday')
+
+</script>

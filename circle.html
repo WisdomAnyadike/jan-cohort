@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    type in any day from monday - wednesday
+    <input type="text" id="input"> <button onclick="showDay()"> click here </button>
+
+</body>
+
+</html>
+<script>
+    let isSqiLightOn = false
+
+    if (isSqiLightOn === true) {
+        console.log('up nepa!!!!');
+    } else {
+        console.log('ohh ohh , nepa why');
+    }
+
+    // snowy , sunny , rainy , windy
+    let season = 'sunny'
+
+    if (season === 'sunny') {
+        console.log('it is sunny outside');
+    } else if (season === 'rainy') {
+        console.log('it is rainy outside , hold an umbrella');
+    } else if (season === 'snowy') {
+        console.log('it is snowy outside , wear a cardigan');
+    } else {
+        console.log('it is windy outside , stay indoors ');
+    }
+
+    let myInput = document.getElementById('input')
+
+    // function showDay() {
+    //     if (myInput.value.trim().toLowerCase() === 'monday') {
+    //          window.alert("today is monday")
+    //     }else if(myInput.value.trim().toLowerCase() === 'tuesday'){
+    //         window.alert("today is tuesday")
+    //     }else if (myInput.value.trim().toLowerCase() === 'wednesday'){
+    //         window.alert("today is wednesday")
+    //     }else{
+    //         window.alert("invalid day")
+    //     }
+
+    // }
+
+    function showDay() {
+        let key = myInput.value.trim().toLowerCase()
+        switch (key) {
+            case 'monday':
+                window.alert("today is monday")
+                break;
+            case 'tuesday':
+                window.alert("today is tuesday")
+                break;
+            case 'wednesday':
+                window.alert("today is wednesday")
+                break;
+            default:
+                alert('invalid day');
+                break;
+        }
+    }
+
+    switch (true) {
+        case (2 < 5):
+            console.log('yes i believe');
+            break;
+        case (5 > 2):
+            console.log('yes');
+            break;
+        case (2 != 2):
+            console.log('no');
+            break;
+        default:
+            console.log('this js ehnnn');
+            break;
+    }
+
+
+
+
+</script>

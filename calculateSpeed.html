@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" id="distance">
+    <input type="number" id="timeTaken">
+    <button onclick="showAns()"> calculate speed</button>
+    <div id="displayAns">
+
+    </div>
+
+
+</body>
+
+</html>
+<script>
+
+    function showAns() {
+        let Distance = distance.value
+        let TimeTaken = timeTaken.value
+
+        console.log(Distance, TimeTaken);
+
+        if (Distance == '' || TimeTaken == '') {
+            alert('please input a value')
+        } else {
+            displayAns.innerHTML = calculateSpeed(Distance, TimeTaken)
+        }
+    }
+
+    function calculateSpeed(d, t) {
+        return `The speed is  ${d / t}m/s`
+    }
+
+</script>

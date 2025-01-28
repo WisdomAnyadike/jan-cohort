@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .all{
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(104, 14, 104);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background-image: url(images.png); */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .div{
+            width: 500px;
+            height: 365px;
+            /* background-color: aqua; */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url(POPJ.jpg);
+            border-radius: 6px;
+            box-shadow: 6px 6px 20px  rgba(0, 0, 0, 0.486);
+            text-align: center;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+        .div h1{
+           color: azure;
+            font-size: 50px;
+            font-family: cursive;
+            
+        }
+        .div input{
+            width: 100%;
+            height: 80px;
+            background-color: rgb(198, 231, 231);
+            padding: 25px;
+            margin-top: 20px;
+            font-size: 20px;
+            
+        }
+        .div button{
+            margin-top: 20px;
+        }
+        .div p{
+            color: blanchedalmond;
+            margin-top: 10px;
+            font-size: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+        }
+        #guess{
+            width: 80%;
+            height: 12%;
+            border: 0;
+            outline: none;
+            border-radius: 2px;
+        }
+        .div button{
+            width: 90px;
+            height: 40px;
+            background-color: blanchedalmond;
+            border: 0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .div button:hover{
+            background-color: darkorchid;
+            color: white;
+        }
+        #result{
+            /* background-color: white; */
+            color: rgb(210, 210, 214);
+            height: 15px;
+            font-size: 15px;
+            margin-top: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    
+<div class="all">
+
+    <div class="div">
+        
+      <div class="pip">
+        <h1 id="h1"></h1>
+        <h1>Guessing Game</h1>
+        <p>Guess the correct number from 0 to 500</p>
+
+        <input id="guess" type="number">
+        <br>
+        <button id="Check" onclick="guessNumber()">Check</button>
+
+        <p id="result"></p>
+      </div>
+        
+    </div>
+
+</div>
+    
+</body>
+<script>
+
+
+    let input = document.getElementById('guess')
+    let resultMessage = document.getElementById('result');
+    
+    
+
+        // function guessNumber(){
+            
+        //     input.value == randomNumber ? alert('You are correct') : alert('You are not correct')
+        // }
+
+        function guessNumber() {
+            
+            let userGuess = parseInt(input.value);
+            let randomNumber = Math.floor(Math.random() *11)
+            console.log(randomNumber);
+                
+    
+   
+
+            if (isNaN(userGuess) || userGuess < -1 || userGuess > 10) {
+                resultMessage.textContent = 'Please enter a valid number between 0 to 10.';
+                input.value = ''
+            } else {
+                if (userGuess === randomNumber) {
+                    resultMessage.textContent = 'BOOM!!!';
+                    input.value = ''
+                } else {
+                    resultMessage.textContent = `Wrong, pls try again`;
+                    input.value = ''
+                }
+            }
+            
+          }
+
+
+
+</script>
+
+
+</html>
