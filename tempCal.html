@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" id="temp">
+    <button onclick="showAns()">Click</button>
+    <div id="output"></div>
+</body>
+
+</html>
+<script>
+
+    function showAns() {
+
+        let myTemperature = temp.value;
+
+        if (myTemperature == '') {
+            alert('Enter a temperature value')
+        } else {
+            output.innerHTML = `${myTemperature}oc in of is ${Math.round(calculateTemp(myTemperature))}of`
+
+        }
+
+    }
+
+    function calculateTemp(temperature) {
+        return (temperature * (9 / 5)) + 32;
+    }
+
+</script>
