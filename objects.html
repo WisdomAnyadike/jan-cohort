@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button onclick="confirmMyDelete()"> delete</button>
+
+</body>
+
+</html>
+<script>
+
+
+    function sayName(params) {
+        console.log(david);
+        var david = 'wow'
+
+    }
+
+    sayName()
+    console.log(daniel);
+    if (true) {
+        var daniel = 'instructor'
+        console.log(daniel);
+    }
+
+
+
+
+    let myName = 'wisdom'
+
+
+    function confirmMyDelete(params) {
+        let userAnswer = confirm('are you sure?')
+        console.log(userAnswer);
+        if (userAnswer) {
+            alert('thank you, delete successful')
+        } else {
+            alert('couldnt delete at the moment')
+        }
+
+    }
+
+
+
+    function run() {
+        var a = 25
+        console.log(a);
+        return function smooth() {
+            var z = 100
+
+            return function anotherOne() {
+                console.log(y);
+                var y = 15
+
+                console.log(a, y, z);
+                return 'wow'
+
+            }
+        }
+    }
+
+
+    console.log(run()()());
+
+
+    let myObj = {
+        name: 'tolu',
+        age: 23,
+        isSmart: false,
+        class: 'js2',
+        job: 'student',
+        tellMeAboutYou: function (params) {
+            return 'i am a student'
+        }
+    }
+    console.log(myObj);
+    console.log(myObj.tellMeAboutYou());
+    console.log(myObj['age']);
+    console.log(myObj['tellMeAboutYou']());
+
+
+
+    let arr = [
+        {
+            name:
+                ['helo',
+                    'hmm',
+                    {
+                        name: 'david', school: {
+                            isDrunk: {
+                                who: 'drake',
+                                class: 'js'
+                            }
+                        }
+                    }
+                ]
+        }
+    ]
+
+
+    console.log(arr[0].name[2].school.isDrunk);
+
+
+    const person = {
+        firstName: 'Asabeneh',
+        age: 250,
+        country: 'Finland',
+        city: 'Helsinki',
+        skills: ['HTML', 'CSS', 'JS'],
+        title: 'teacher',
+        address: {
+            street: 'Heitamienkatu 16',
+            pobox: 2002,
+            city: 'Helsinki'
+        },
+        getPersonInfo: function () {
+            return `I am ${this.firstName} and I live in ${this.city}, ${this.country}. I am ${this.age}.`
+        }
+    }
+
+    let string = 'wisdom'
+    string[0] = 'y'
+
+
+    let arr2 = [1, 2, 4]
+    arr2[2] = 3
+
+
+    const copyPerson = Object.assign({ stadium: 'stanford' }, person)
+    copyPerson.firstName = 'wisdom'
+    console.log(copyPerson)
+
+    console.log(Object.keys(copyPerson));
+    console.log(Object.values(copyPerson));
+    console.log(Object.entries(copyPerson));
+
+    console.log(copyPerson.hasOwnProperty('Stadium'));
+
+
+    
+
+
+</script>
