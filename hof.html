@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // map , forEach , find , every , some , reduce , filter, sort , findIndex
+
+    let foodArr = [{ name: 'amala' }, { name: 'bread' }, { name: 'rice' }, { name: 6 }, { name: 'burger' }]
+
+    let myFoods = foodArr.map((food, index, orginalArr) => {
+        console.log(food, index, orginalArr);
+        return food.name
+    })
+    console.log(myFoods);
+
+    let theFoods = foodArr.forEach((food, index, orginalArr) => {
+        console.log(food, index, orginalArr);
+        return food.name
+    })
+
+    console.log(theFoods);
+
+
+    console.log(foodArr.find((food, index, orginalArr) => {
+
+        return food.name.length > 10
+
+    }));
+
+    console.log(foodArr.findIndex((food, index, orginalArr) => {
+
+        return food.name.length > 5
+
+    }));
+
+
+
+
+    for (let index = 0; index < foodArr.length; index++) {
+        console.log(foodArr[index], index, foodArr);
+    }
+
+
+    // let func = () => {
+
+    // }
+
+    function giveMeANum(params) {
+        return 30
+    }
+
+
+    let myValue = foodArr.every((myfood) => {
+        console.log(myfood);
+        return typeof (myfood.name) == "number"
+    })
+
+    console.log(myValue);
+
+    let somesVal = foodArr.some((myfood) => {
+        console.log(myfood);
+        return typeof (myfood.name) == "number"
+    })
+
+    console.log(somesVal);
+
+
+    let filteredFoodArr = foodArr.filter((food, i) => {
+        return typeof food.name === 'number'
+    })
+
+    console.log(filteredFoodArr);
+
+
+    const countries = ['Albania', 'Bolivia',
+        'Canada',
+        'Denmark',
+        'Ethiopia',
+        'Finland',
+        'Germany',
+        'Hungary',
+        'Ireland',
+        'Japan',
+        'Kenya',
+    ]
+
+
+    function categorizeCountries(params) {
+        return countries.filter((country) => country.toLowerCase().includes(params.toLowerCase()) )
+    }
+    console.log(categorizeCountries("LAND"));
+
+    let categorizeCountries1 = countries.filter((countries) => {
+        return countries.includes('land')
+    })
+    console.log(categorizeCountries1);
+
+
+
+
+</script>
