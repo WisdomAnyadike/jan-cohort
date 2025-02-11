@@ -22,7 +22,7 @@
             background-color: #080710;
         }
 
-        .background {
+        /* .background {
             width: 430px;
             height: fit-content;
             position: absolute;
@@ -36,6 +36,17 @@
             width: 200px;
             position: absolute;
             border-radius: 50%;
+        } */
+
+        table,
+        th,
+        td,
+        tr,
+        thead,
+        tbody {
+            border-collapse: collapse;
+            border: 2px solid white;
+            padding: 20px;
         }
 
         .shape:first-child {
@@ -148,43 +159,77 @@
 </head>
 
 <body>
-    <div class="background">
+    <!-- <div class="background">
         <div class="shape"></div>
         <div class="shape"></div>
-    </div>
-    <form>
-        <h3>Login Here</h3>
+    </div> -->
+    <div
+        style="overflow-y: scroll; height: 100vh; background-color: #1845ad; display: flex; flex-direction: column; justify-content: center; align-items: start;">
+        <form style="background-color: #080710;">
+            <h3>Login Here</h3>
 
-        <label for="username">Username</label>
-        <input type="text" placeholder="Username" id="username">
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username" id="username">
 
-        <label for="email">Email</label>
-        <input type="text" placeholder="Email" id="email">
+            <label for="email">Email</label>
+            <input type="text" placeholder="Email" id="email">
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" id="password">
 
-        <label for="confirmpassword">Confirm Password</label>
-        <input type="confirmpassword" placeholder="Confirm Password" id="confirmpassword">
+            <label for="confirmpassword">Confirm Password</label>
+            <input type="confirmpassword" placeholder="Confirm Password" id="confirmpassword">
 
-        <legend style="display: flex; flex-direction: column; align-items: start;">
-            <input type="checkbox" name="" id="mycheckbox">
-            <small for="mycheckbox"> agree to terms and conditions </small>
-        </legend>
+            <legend style="display: flex; flex-direction: column; align-items: start;">
+                <input type="checkbox" name="" id="mycheckbox">
+                <small for="mycheckbox"> agree to terms and conditions </small>
+            </legend>
 
 
-        <button type="button" onclick="signUp()">Sign Up</button>
-        <div class="social">
-            <div class="go"><i class="fab fa-google"></i> Google</div>
-            <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+            <button type="button" onclick="signUp()">Sign Up</button>
+            <div class="social">
+                <div class="go"><i class="fab fa-google"></i> Google</div>
+                <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+            </div>
+
+
+        </form>
+
+        <div style="background-color: brown; width: 40%; height: 100vh; color: white; display: flex
+        ; flex-direction: column; align-items: center; justify-content: center;">
+
+            <div style="display: flex; margin-bottom: 30px;"> <button onclick="displayUsers(checkArr)">all users
+                </button> <button onclick="displayAgreedUsers()"> agreed users
+                </button> <button onclick="displayUnagreedUsers()"> unagreed users</button> </div>
+
+
+            <table style="font-size: 30px;">
+                <thead>
+                    <th> s/n </th>
+                    <th>username</th>
+                    <th> email</th>
+                    <th>password </th>
+                    <th> is agreed </th>
+
+                </thead>
+                <tbody id="tbody">
+
+
+                </tbody>
+            </table>
+
         </div>
-    </form>
+
+    </div>
+
 </body>
 
 </html>
 <script>
 
-     let checkArr = []
+    let checkArr =  JSON.parse(localStorage.getItem('JanUsersDatabase')) || []
+
+    displayUsers(checkArr)
 
     function signUp() {
         let input1 = username.value.trim()
@@ -195,30 +240,76 @@
         console.log(mycheckbox.checked);
 
 
-        if (!input1 || !input2 || !input3 || !input4 || !mycheckbox.checked) {
+        if (!input1 || !input2 || !input3 || !input4) {
             alert('all field are mandatory')
         } else if (input3.length < 8) {
             alert('Password must be at least 8 characters')
-        }else if(input3 !== input4){
+        } else if (input3 !== input4) {
             alert('Password does not match')
 
-            
-        } else if(checkArr.find((userObject)=>userObject.Email == input2)) {    
 
-         alert('user already exists')
+        } else if (checkArr.find((userObject) => userObject.Email == input2)) {
 
-        }else{
+            alert('user already exists')
+
+        } else {
             let userData = {
-                Username : input1,
+                Username: input1,
                 Email: input2,
                 Password: input3,
                 isAgreed: mycheckbox.checked
             }
             checkArr.push(userData)
-      console.log(checkArr);
+            localStorage.setItem('JanUsersDatabase', JSON.stringify(checkArr))
+            console.log(checkArr);
+            displayUsers(checkArr)
+
+
+
+
         }
     }
 
-     
-    
+    function displayAgreedUsers() {
+        let agreedUsers = checkArr.filter((userObj, i, arr) => { return userObj.isAgreed == true })
+        console.log(agreedUsers);
+        displayUsers(agreedUsers)
+    }
+
+    function displayUnagreedUsers() {
+        let unagreedUsers = checkArr.filter((userObj, i, arr) => { return userObj.isAgreed == false })
+        console.log(unagreedUsers);
+        displayUsers(unagreedUsers)
+    }
+
+
+
+    function displayUsers(arr) {
+        tbody.innerHTML = ''
+        arr.forEach((user, i) => {
+            tbody.innerHTML += `<tr>
+                        <td> ${i + 1}  </td>
+                        <td>  ${user.Username}</td>
+                        <td> ${user.Email}</td>
+                        <td> ${user.Password}</td>
+                        <td> ${user.isAgreed}</td>
+                    </tr>`
+        })
+    }
+
+
+
+
+    localStorage.setItem('myname', 'wisdom')
+    localStorage.setItem('myClass', JSON.stringify([{ name: 'tolu' }]))
+    localStorage.removeItem('myClass')
+    let value = JSON.parse(localStorage.getItem('myClass'))
+
+
+
+
+
+
+    console.log(value);
+
 </script>
