@@ -19,7 +19,8 @@
 
 </html>
 <script>
-    let database = []
+    let database = JSON.parse(localStorage.getItem('toDo')) || []
+    display()
     let myInput = document.querySelector('.todo')
     function addTodo(params) {
         if (myInput.value.trim() == '') {
@@ -27,11 +28,12 @@
         } else {
             database.push(myInput.value.trim())
             console.log(database);
-
+            localStorage.setItem('toDo' , JSON.stringify(database))
             myInput.value = ''
             display()
 
         }
+        
     }
 
     function editValue(i) {
@@ -41,6 +43,7 @@
         } else {
             database.splice(i, 1, promptValue)
             console.log(database);
+            localStorage.setItem('toDo' , JSON.stringify(database))
             display()
 
         }
@@ -51,6 +54,7 @@
 
     // let data = ['hello', 'hi' , 'wow']
     // console.log(`  <p>  ${data.join(' </p>  <p> ')} </p>`);
+
 
     function display() {
         output.innerHTML = ''

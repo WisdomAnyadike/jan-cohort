@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <select name="" id="Provider">
+        <option value=""> Choose Provider</option>
+        <option value="MTN"> MTN</option>
+        <option value="GLO"> GLO</option>
+        <option value="AIRTEL"> AIRTEL</option>
+        <option value="9MOBILE"> 9MOBILE</option>
+    </select>
+
+
+    <select name="" id="Amount">
+        <option value=""> Choose Amount</option>
+        <option value="100"> 100</option>
+        <option value="200"> 200</option>
+        <option value="500"> 500</option>
+        <option value="1000"> 1000</option>
+    </select>
+
+    <br>
+    <br>
+
+    <button onclick="myButton()">Generate Pin</button>
+    <br>
+    <p id="mypin"> </p>
+
+    <br>
+    <br>
+
+    <input type="text" value="*311*pin#" placeholder="load card here">
+    <br>
+    <button> Load card</button>
+
+
+</body>
+
+</html>
+<script>
+
+    function myButton(params) {
+        if (Provider.value == "") {
+            alert('please choose a provider')
+        }
+        else if (Amount.value == "") {
+            alert('please choose an amount')
+        }
+        else {
+            //  let numbers = ['1' ,'2' , '3', '4', '5' , '6' , '7' , '8', '9', '0']
+
+            let pin = ''
+            // let random = `${Math.floor(Math.random() * 1000000000000000)}`
+            // console.log(random, random.length);
+
+            for (let index = 0; index < 15; index++) {
+                let picker = Math.floor(Math.random() * 10); //8
+
+                pin += picker; // pin = '92' + 8
+            }
+
+            console.log(pin, pin.length);
+            mypin.innerHTML=  pin
+        }
+    }
+
+    console.log(Provider.value);
+
+    let randd = Math.floor(Math.random() * 24) + 2
+    console.log(randd);
+
+    
+</script>

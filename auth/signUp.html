@@ -227,7 +227,7 @@
 </html>
 <script>
 
-    let checkArr =  JSON.parse(localStorage.getItem('JanUsersDatabase')) || []
+    let checkArr = JSON.parse(localStorage.getItem('JanUsersDatabase')) || []
 
     displayUsers(checkArr)
 
@@ -300,16 +300,14 @@
 
 
 
-    localStorage.setItem('myname', 'wisdom')
-    localStorage.setItem('myClass', JSON.stringify([{ name: 'tolu' }]))
-    localStorage.removeItem('myClass')
-    let value = JSON.parse(localStorage.getItem('myClass'))
+    // localStorage.setItem('myname', 'wisdom')
+    // localStorage.setItem('myClass', JSON.stringify([{ name: 'tolu' }]))
+    // localStorage.removeItem('myClass')
+    // let value = JSON.parse(localStorage.getItem('myClass'))
+    // console.log(value);
 
 
-
-
-
-
-    console.log(value);
-
+    let arr = [1, 2, 4, 5, 6]
+    console.log(arr.splice(2, 3,));
+    console.log(arr);
 </script>
