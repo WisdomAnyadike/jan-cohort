@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" id="input" oninput="checkPassword()">
+    <br>
+    <small id="error"></small>
+
+</body>
+
+</html>
+<script>
+    // \w (takes any character except space & symbols(only symbol it takes is _))
+    // \W (only takes space and symbols)
+
+
+    // let pattern = /^W/i
+    // let myRegex = /^A\W+ {5}i am{5} eating$/
+
+    // let rechargeRegex = /^[*]31{2}[*][0-9]{15}#$/
+
+    // console.log(rechargeRegex.test('*311*123456789876543#'));
+    // console.log(myRegex.test('A      i ammmmm eating'));
+
+
+    // let text = 'W6785     i ammmmM eating'
+
+    // console.log(myRegex.test(text));
+
+    let digitRegex = /^\D{3}[^S]{5}\S{5}$/
+
+    let myText = 'ABCsssss12345'
+    console.log(digitRegex.test(myText));
+
+    //+2349164934974
+    let naijaNumberRegex = /^0([7][0]||[8-9][0-1])[0-9]{8}$/
+    console.log(naijaNumberRegex.test('07164934974'));
+
+    //anyadikewisdom@gmail.com
+    //sqi@ict.co.uk
+
+    let emailRegex = /^\w+[@][a-z]+.[a-z]+.{0,1}[a-z]+$/
+    let emailRegex1 = /^\w+[@][a-z]+(.[a-z]+){1,2}$/
+    console.log(emailRegex1.test('anyadikewisdom@gmail.com'));
+    console.log(emailRegex1.test('sqi@ict.co.uk'));
+
+
+    'https://getbootstrap.com/'
+
+    function checkPassword() {
+        let forCapLettersRegex = /[A-Z]/
+        let forDigits = /[0-9]/
+        let forSymbol = /[_/*.@!+#-]/
+        let forSmall = /[a-z]/
+        let PasswordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[_/*.@!+#-])(?=.*[a-z])[A-Za-z0-9_/*.@!+#-]{8,20}$/
+
+
+        console.log('for capital' + forCapLettersRegex.test(input.value.trim()));
+        console.log('for symbol' + forSymbol.test(input.value.trim()));
+
+        if (!PasswordRegex.test(input.value.trim())) {
+            error.style.color = 'red'
+            
+            if (!forCapLettersRegex.test(input.value.trim())) {
+                error.innerHTML = 'password must include a capital letter'
+            } else if (!forDigits.test(input.value.trim())) {
+                error.innerHTML = 'password must include a digit'
+            } else if (!forSymbol.test(input.value.trim())) {
+                error.innerHTML = 'password must include a symbol'
+            } else if (!forSmall.test(input.value.trim())) {
+                error.innerHTML = 'password must include a lowercase letter'
+            } else {
+                error.innerHTML = 'password length must be at least 8 characters'
+            }
+        } else {
+            error.style.color = 'green'
+            error.innerHTML = 'password is correct'
+        }
+
+    }
+
+
+
+</script>
