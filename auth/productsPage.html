@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    html,
+    body,
+    #allproducts,
+    #inner {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #8850FF;
+
+        font-family: "Roboto", "Helvetica", sans-serif;
+
+        transition: background-color 0.2s;
+        will-change: background-color;
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .inspired-by {
+        display: block;
+        position: relative;
+        margin-bottom: 15px;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .wrapper {
+        position: relative;
+        overflow-x: hidden;
+        width: 25%;
+        height: 100%;
+    }
+
+    .card {
+        display: block;
+        position: absolute;
+        top: 25px;
+        margin: 0 auto;
+        width: 350px;
+        background-color: #fff;
+        border-radius: 15px;
+
+        box-shadow: 0 30 50 rgba(0, 0, 0, 0.2);
+
+        transform: translateX(-50%);
+        transition: left 0.5s ease-out;
+        will-change: left;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+    .card--19 {
+        left: 50%;
+    }
+
+    .card--solstice,
+    .card--huarache {
+        left: 150%;
+    }
+
+    .card__header {
+        position: relative;
+        height: 170px;
+        padding: 30px 30px 300px;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+        color: #fff;
+    }
+
+    .card__header--19 {
+        background-color: #F72648;
+        background-image: linear-gradient(#3e1e23, #FCCB3C);
+
+        background: #F72648;
+        background: linear-gradient(#2f2265, #6f6b61);
+    }
+
+
+
+    .card__watermark {
+        overflow: hidden;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+    }
+
+    .card__watermark::after {
+        content: attr(data-watermark);
+        position: relative;
+        left: -20px;
+        color: rgba(0, 0, 0, .3);
+        font-size: 240px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .card__logo {
+        width: 50px;
+        height: auto;
+    }
+
+    .card__price {
+        float: right;
+        font-size: 16px;
+        font-weight: 300;
+    }
+
+    .card__title {
+        margin: 35px 0 20px;
+        font-size: 15px;
+        line-height: 1.1em;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .card__subtitle {
+        display: block;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+    .card__body {
+        position: relative;
+        padding: 40px 30px 20px;
+    }
+
+    .card__image {
+        z-index: 1;
+        position: absolute;
+        top: -295px;
+        left: -30px;
+        width: 125%;
+
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+
+    .card__wish-list {
+        display: block;
+        width: 50%;
+        margin: 0 auto 15px;
+        padding: 15px;
+        border: 2px solid #fff;
+        border-radius: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    .card__wish-list--19 {
+        color: #8850FF;
+        border-color: #8850FF;
+    }
+
+    .card__wish-list--solstice {
+        color: #FFBA00;
+        border-color: #FFBA00;
+    }
+
+    .card__wish-list--huarache {
+        color: #26C9F7;
+        border-color: #26C9F7;
+    }
+
+    .card__category {
+        display: block;
+        font-size: 12px;
+        color: #AEAEAE;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .card__will-animate {
+        will-change: transform;
+    }
+
+    .cards-placeholder {
+        display: block;
+        position: relative;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .cards-placeholder__item {
+        opacity: 0.3;
+        display: inline-block;
+        margin-right: 10px;
+        background-color: #fff;
+        width: 30px;
+        height: 5px;
+        border-radius: 5px;
+
+        transition: opacity 0.2s;
+        will-change: opacity;
+    }
+
+    .cards-placeholder__item--active {
+        opacity: 1;
+    }
+</style>
+
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
+<script>
+    //1st method
+
+    function showFirstPage() {
+        document.body.innerHTML = `
+    <div id="inner">
+        <button onclick="filterProducts()" style="width:100px; height:100px;"> filter by price </button>
+
+        <div id="allproducts">
+
+
+
+        </div>
+
+    </div>`
+    }
+
+    showFirstPage()
+
+
+
+    //2nd method
+    async function fetchProducts(params) {
+        try {
+            const res = await fetch('https://dummyjson.com/products')
+            const data = await res.json()
+            let myProducts = data.products
+            displayProducts(myProducts)
+
+
+
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    fetchProducts()
+
+    let sorted = false
+
+    function filterProducts() {
+        if (sorted) {
+            fetch('https://dummyjson.com/products').then((response) => response.json()).then((data) => {
+                let products = data.products
+                displayProducts(products)
+                sorted = false
+            }).catch((error) => console.log(error))
+
+        } else {
+            fetch('https://dummyjson.com/products').then((response) => response.json()).then((data) => {
+                let products = data.products
+                products.sort((a, b) => b.price - a.price)
+                console.log(products);
+                displayProducts(products)
+                sorted = true
+            }).catch((error) => console.log(error))
+        }
+
+
+
+    }
+
+
+
+    function displayProducts(theProducts) {
+        allproducts.innerHTML = ''
+        theProducts.forEach(({ images, price, rating, description, brand, title }, i) => {
+
+            allproducts.innerHTML += ` <div class="wrapper">
+
+
+<div class="card card--19">
+<div class="card__header card__header--19">
+<div class="card__watermark" data-watermark="Product"></div>
+
+<img src="${images[0]}" alt="Nike" class="card__logo card__will-animate">
+
+<span class="card__price card__will-animate">$${price}</span>
+
+<h1 class="card__title card__will-animate"> ${title}</h1>
+<span class="card__subtitle card__will-animate"> ${description}.</span>
+
+</div>
+
+<div class="card__body">
+${brand === 'Calvin Klein' ? `<img width="100px" height="350px" src="${images[0]}" alt="Nike 19" class="card__image card__will-animate">` : `<img width="130px" height="300px" src="${images[0]}" alt="Nike 19" class="card__image card__will-animate">`}
+<div onclick="helpSeeMore('${i + 1}')" class="card__wish-list card__wish-list--19 card__will-animate"> See more </div>
+
+<span class="card__category card__will-animate"> ${brand ? brand : 'No Brand'}</span>
+</div>
+</div>
+
+
+
+
+
+</div> `
+
+
+
+
+
+        });
+    }
+
+
+
+    let nums = [12, 4, 6, 7, 2345]
+    nums.sort((a, b) => a - b)
+    console.log(nums);
+
+
+    function helpSeeMore(index) {
+        fetch(`https://dummyjson.com/products/${index}`).then((response) => response.json()).then((data) => {
+            console.log(data);
+        }).catch((error) => console.log(error))
+
+    }
+</script>
