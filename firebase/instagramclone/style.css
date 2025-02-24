@@ -1,0 +1,269 @@
+/* ------- font ------- */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins&display=swap");
+
+/* ------- custom properties ------- */
+:root {
+    --clr-primary: 260, 94%, 75%;
+    --clr-primary-dark: 260, 98%, 69%;
+    --clr-white: 0, 0%, 100%;
+    --clr-black: 0, 0%, 0%;
+    --clr-dark: 0, 0%, 18%;
+    --clr-highlight: 132, 100%, 95%;
+    --clr-warning: 0, 100%, 50%;
+    --body-font: "Montserrat", sans-serif;
+}
+
+/* ------- CSS reset ------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: none;
+}
+
+body {
+    background-color: rgba(216, 112, 147, 0.461);
+    font-family: var(--body-font);
+    font-style: normal;
+    line-height: normal;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+
+
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+/* ------- colors ------- */
+.bg-black {
+    background-color: hsl(var(--clr-black));
+}
+
+.bg-white {
+    background-color: hsl(var(--clr-white));
+}
+
+.text-black {
+    color: hsl(var(--clr-black));
+}
+
+.text-dark {
+    color: hsl(var(--clr-dark));
+}
+
+.text-white {
+    color: hsl(var(--clr-white));
+}
+
+/* --------- components --------- */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.container section {
+    width: 100%;
+    flex: 1 1;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
+
+.swiper-slide {
+    opacity: 0 !important;
+    transition: 0.3s;
+}
+
+.swiper-slide-active {
+    opacity: 1 !important;
+}
+
+.swiper-slide>.hero-super {
+    transform: translateY(-30px);
+    opacity: 0;
+    transition-duration: 0.8s;
+}
+
+.swiper-slide-active>.hero-super {
+    transform: none;
+    opacity: 1;
+}
+
+.swiper-slide>.hero-img {
+    transition-duration: 0.8s;
+    transform: scale(1.1);
+    opacity: 0;
+}
+
+.swiper-slide-active>.hero-img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.hero {
+    position: relative;
+}
+
+.hero .overlay-black {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: hsl(var(--clr-black), 0.75);
+    z-index: 3;
+}
+
+.hero .logo {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 72px;
+    z-index: 3;
+}
+
+.hero-img {
+    object-fit: cover;
+    height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .hero-img {
+        height: 350px;
+    }
+}
+
+.hero-super {
+    position: absolute;
+    bottom: 88px;
+    left: 40px;
+    color: hsl(var(--clr-white));
+    font-size: 44px;
+    font-weight: 600;
+    line-height: normal;
+    z-index: 3;
+    transition-delay: 0.2s;
+}
+
+@media screen and (max-width: 992px) {
+    .hero-super {
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero-super {
+        font-size: 32px;
+    }
+}
+
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 64px;
+}
+
+@media screen and (max-width: 768px) {
+    .sign-up {
+        padding: 32px 24px;
+    }
+}
+
+.sign-up h1 {
+    color: hsl(var(--clr-black));
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.sign-up h1 span {
+    color: hsl(var(--clr-primary));
+}
+
+.sign-up h2 {
+    color: hsl(var(--clr-dark));
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    width: 90%;
+    margin-bottom: 52px;
+}
+
+.sign-up h2 .highlight {
+    padding: 0 4px;
+    font-weight: 500;
+    background: linear-gradient(to top, hsl(var(--clr-highlight)) 50%, transparent 50%);
+}
+
+.sign-up__form {
+    width: 100%;
+    max-width: 416px;
+    margin-bottom: 24px;
+}
+
+.sign-up__form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.sign-up__form label {
+    color: hsl(var(--clr-black));
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.sign-up__form label span {
+    color: hsl(var(--clr-warning));
+}
+
+.sign-up__form input {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid hsl(var(--clr-dark), 50%);
+}
+
+.sign-up__form input[type="password"] {
+    font-family: Verdana;
+    letter-spacing: 0.125em;
+}
+
+.sign-up__form input::placeholder {
+    font-size: 16px;
+    color: hsl(var(--clr-dark), 50%);
+}
+
+.sign-up__form input:focus-visible {
+    outline-color: hsl(var(--clr-primary));
+}
