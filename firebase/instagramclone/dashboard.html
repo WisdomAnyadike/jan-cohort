@@ -1,11 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-database-compat.js"></script>
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .div1 {
+            padding: 30px;
+            background-color: blueviolet;
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
-    welcome guys
+    <div class="div1" style="display: flex; justify-content: space-between;"> <span id="verify"> Loading...</span>
+        <span> Group Chat </span>
+        <button onclick="logOut()">Log Out</button>
+
+
+    </div>
+
+    <div>
+        <input id="message" type="text">
+        <button onclick="sendMessage()"> click to send </button>
+    </div>
+
+
+    <div id="previewMessages">
+
+    </div>
 </body>
+
 </html>
+<script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCKPFuwJur2cAOnpE1-EBSg1kT1rXzhkUg",
+        authDomain: "jan-cohort.firebaseapp.com",
+        databaseURL: "https://jan-cohort-default-rtdb.firebaseio.com",
+        projectId: "jan-cohort",
+        storageBucket: "jan-cohort.firebasestorage.app",
+        messagingSenderId: "1035240504008",
+        appId: "1:1035240504008:web:799b33d296f2e6e874c3fd"
+    };
+
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const database = firebase.database();
+    // let currentUser
+    let index
+
+
+    function checkUser() {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // currentUser = user
+                let verify = document.getElementById('verify')
+                console.log(user);
+                verify.innerHTML = `Welcome ${user.displayName}`
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/v8/firebase.User
+                var uid = user.uid;
+
+                // ...
+            } else {
+                // User is signed out
+                alert('User not found')
+                window.location.href = `index.html`
+                // ...
+            }
+        });
+
+
+    }
+
+    checkUser()
+
+
+
+    function logOut(params) {
+        firebase.auth().signOut().then(() => {
+            alert('sign out successfully')
+            window.location.href = `Login.html`
+            // Sign-out successful.
+        }).catch((error) => {
+            alert(error);
+            // An error happened.
+        });
+    }
+
+    // let index = Number(localStorage.getItem('number')) || 0
+
+
+    function sendMessage(params) {
+
+        let message = document.getElementById("message").value.trim()
+        if (!message) {
+            alert("please enter a message")
+        } else {
+
+
+            firebase.database().ref(`chats/${index}`).set({
+                sender: auth.currentUser.displayName,
+                message: message,
+
+            }).then(() => {
+               
+         
+            }).catch((err) => {
+                alert(err)
+            })
+
+            // index++
+            // localStorage.setItem('number', index)
+
+        }
+    }
+
+
+    function displayMessages() {
+        previewMessages.innerHTML = 'loading....'
+        firebase.database().ref('chats').on('value', (snapshot) => {
+            const data = snapshot.val() || [];
+            index = data.length
+            console.log(index);
+            console.log(data);
+            previewMessages.innerHTML = ''
+            data.forEach(({ sender, message }, i) => {
+                previewMessages.innerHTML += ` 
+                <br>
+            
+                    <div>
+                     <p> username: ${sender} </p>
+                     <p> message: ${message} </p>
+                    </div>
+              
+                 <br>
+                    `
+            });
+
+        });
+
+    }
+
+
+    displayMessages()
+
+
+
+</script>

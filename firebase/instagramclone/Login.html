@@ -9,6 +9,13 @@
     <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-auth-compat.js"></script>
 </head>
+<style>
+    a {
+        text-decoration: none;
+        text-align: center;
+        color: black;
+    }
+</style>
 
 <body>
     <main class="container">
@@ -26,6 +33,7 @@
                     <label for="password">Password <span>*</span></label>
                     <input type="password" id="password" name="password" placeholder="●●●●●●●●●" required>
                 </div>
+                <a href="#" onclick="forgotPassword()">Forgot Password</a><br>
                 <button type="button" style="width: 160px;" id="signin" onclick="Login()"> Sign In</button>
             </form>
         </section>
@@ -65,10 +73,23 @@
                 .then((userCredential) => {
 
                     var user = userCredential.user;
-                    alert('login successful')
-                    signin.innerHTML = 'Sign In'
-                    signin.disabled = false
-                    window.location.href = 'dashboard.html'
+                    if (!user.emailVerified) {
+                        firebase.auth().currentUser.sendEmailVerification()
+                            .then(() => {
+                                // Email verification sent!
+                                alert('Verification has been sent to your email')
+                                signin.innerHTML = 'Sign In'
+                                signin.disabled = false
+                                // ...
+                            });
+                    } else {
+                        alert('login successful')
+                        signin.innerHTML = 'Sign In'
+                        signin.disabled = false
+                        console.log(user);
+                        window.location.href = 'dashboard.html'
+                    }
+
 
                 })
                 .catch((error) => {
@@ -77,6 +98,28 @@
                     alert(errorMessage)
                     signin.innerHTML = 'Sign In'
                     signin.disabled = false
+                });
+        }
+
+    }
+
+    function forgotPassword() {
+        let myEmail = document.getElementById('email').value.trim()
+
+        if (!myEmail) {
+            alert('Please input your email')
+        } else {
+            firebase.auth().sendPasswordResetEmail(myEmail)
+                .then(() => {
+                    // Password reset email sent!
+                    alert('Verification Email has been sent')
+                    // ..
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorMessage)
+                    // ..
                 });
         }
 
