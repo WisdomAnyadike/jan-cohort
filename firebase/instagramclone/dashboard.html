@@ -7,6 +7,8 @@
     <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-database-compat.js"></script>
+    <link rel="stylesheet" href="dash.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Document</title>
     <style>
         * {
@@ -23,14 +25,15 @@
 </head>
 
 <body>
-    <div class="div1" style="display: flex; justify-content: space-between;"> <span id="verify"> Loading...</span>
+    <div class="div1" style="display: flex; justify-content: space-between; position: fixed; top: 0; width: 100%;">
+        <span id="verify"> Loading...</span>
         <span> Group Chat </span>
-        <button onclick="logOut()">Log Out</button>
+        <span> <button onclick="moveToProfile()"> profile </button> <button onclick="logOut()">Log Out</button> </span>
 
 
     </div>
 
-    <div>
+    <!-- <div>
         <input id="message" type="text">
         <button onclick="sendMessage()"> click to send </button>
     </div>
@@ -38,7 +41,43 @@
 
     <div id="previewMessages">
 
-    </div>
+    </div> -->
+
+
+    <main>
+
+
+        <section class="Chat">
+            <div class="ChatHead">
+                <li class="group">
+                    <div class="avatar"><img src="imgs/Asset 1.svg" alt=""></div>
+                    <p class="GroupName" style="color: white;">Javascript Class</p>
+
+                </li>
+                <div class="callGroup">
+                    <i class="fa-solid fa-phone"></i>
+                    <i class="fa-solid fa-video"></i>
+
+                </div>
+            </div>
+            <div id="previewMessages" class="MessageContainer">
+
+
+
+
+
+            </div>
+            <form id="MessageForm">
+                <input type="text" onkeypress="sendMssg(event)" id="MessageInput">
+                <button type="button" class="Send" onclick="sendMessage()"><i
+                        class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </section>
+    </main>
+
+
+
+
 </body>
 
 </html>
@@ -106,19 +145,18 @@
 
     function sendMessage(params) {
 
-        let message = document.getElementById("message").value.trim()
+        let message = document.getElementById("MessageInput").value.trim()
         if (!message) {
             alert("please enter a message")
         } else {
-
-
             firebase.database().ref(`chats/${index}`).set({
                 sender: auth.currentUser.displayName,
                 message: message,
+                time: new Date().toLocaleTimeString()
 
             }).then(() => {
-               
-         
+                document.getElementById("MessageInput").value = ''
+
             }).catch((err) => {
                 alert(err)
             })
@@ -131,23 +169,31 @@
 
 
     function displayMessages() {
-        previewMessages.innerHTML = 'loading....'
+        previewMessages.innerHTML = ' <p style="display: flex; align-items: center; justify-content: center; color: white;"> loading.... </p>'
         firebase.database().ref('chats').on('value', (snapshot) => {
             const data = snapshot.val() || [];
             index = data.length
             console.log(index);
             console.log(data);
             previewMessages.innerHTML = ''
-            data.forEach(({ sender, message }, i) => {
+            data.forEach(({ sender, message, time }, i) => {
+                let check = auth.currentUser.displayName === sender
+                let Class = check ? 'message me' : 'message you'
+                let editAndDelete = check ? `<p> <button> edit </button> <button onclick="delMssg('${i}')"> del </button>  </p>` : ''
                 previewMessages.innerHTML += ` 
-                <br>
-            
-                    <div>
-                     <p> username: ${sender} </p>
-                     <p> message: ${message} </p>
+             
+
+                 <div class="${Class}">
+                    <p style="color: #c15224 ;" > ${sender} </p>
+                    <p class="messageContent">${message}</p>
+                    <div class="messageDetails">
+                        <div class="messageTime"> ${time ? time.slice(0, 4) + time.slice(7, 11) : '10:30 AM'}</div>
+                        <i class="fa-solid fa-check"></i>
+                        ${editAndDelete}
                     </div>
-              
-                 <br>
+                </div>
+               
+            
                     `
             });
 
@@ -158,6 +204,21 @@
 
     displayMessages()
 
+    function delMssg(i) {
+        firebase.database().ref(`chats/${i}`).remove().then().catch((err) => alert(err))
+    }
+
+    function sendMssg(e) {
+
+        if (e.code == 'Enter') {
+            e.preventDefault()
+            sendMessage()
+            document.getElementById("MessageInput").value = ''
+        }
+    }
 
 
+    function moveToProfile(params) {
+        window.location.href = 'profile.html'
+    }
 </script>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-auth-compat.js"></script>
+</head>
+
+<body>
+
+    <img id="image" src="" width="200px" height="200px" alt="" style="border-radius: 50%;">
+    <input type="file" id="inputFile" onchange="pickFile()">
+</body>
+
+</html>
+<script>
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCKPFuwJur2cAOnpE1-EBSg1kT1rXzhkUg",
+        authDomain: "jan-cohort.firebaseapp.com",
+        databaseURL: "https://jan-cohort-default-rtdb.firebaseio.com",
+        projectId: "jan-cohort",
+        storageBucket: "jan-cohort.firebasestorage.app",
+        messagingSenderId: "1035240504008",
+        appId: "1:1035240504008:web:799b33d296f2e6e874c3fd"
+    };
+
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function checkUser() {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // currentUser = user
+                let verify = document.getElementById('verify')
+                console.log(user);
+                user.photoURL ? image.src = user.photoURL : image.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6LXNJFTmLzCoExghcATlCWG85kI8dsnhJng&s'
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/v8/firebase.User
+                var uid = user.uid;
+
+                // ...
+            } else {
+                // User is signed out
+                alert('User not found')
+                window.location.href = `index.html`
+                // ...
+            }
+        });
+
+
+    }
+
+    checkUser()
+
+
+    function pickFile() {
+        let fileTag = document.getElementById('inputFile')
+        console.log(fileTag.files[0]);
+
+        let file = fileTag.files[0]
+
+        if (!file) {
+            alert('please pick a picture')
+            return
+        }
+
+        let formData = new FormData()
+        formData.append("file", file)
+        formData.append("upload_preset", "firebase")
+
+        fetch('https://api.cloudinary.com/v1_1/anyacodes/image/upload', {
+            method: "POST",
+            body: formData
+        })
+            .then((res) => res.json()).then((data) => {
+                console.log(data)
+                const user = auth.currentUser;
+
+                user.updateProfile({
+                    photoURL: data.secure_url
+                }).then(() => {
+                    image.src = data.secure_url
+                }).catch((error) => {
+                    alert(error)
+                });
+
+
+            }).catch((err) => alert(err))
+
+    }
+
+
+
+</script>

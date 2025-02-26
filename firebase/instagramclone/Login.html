@@ -69,12 +69,12 @@
             signin.innerHTML = 'Sign In'
             signin.disabled = false
         } else {
-            firebase.auth().signInWithEmailAndPassword(email, password)
+           auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
 
                     var user = userCredential.user;
                     if (!user.emailVerified) {
-                        firebase.auth().currentUser.sendEmailVerification()
+                        auth.currentUser.sendEmailVerification()
                             .then(() => {
                                 // Email verification sent!
                                 alert('Verification has been sent to your email')
